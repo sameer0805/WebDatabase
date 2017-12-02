@@ -18,7 +18,7 @@ class Upload extends Component{
         reader.onloadend = () => {
             console.log(reader.result);
             this.setState({currentImageString: reader.result});
-            // axios.post('/post', {image: reader.result});
+            axios.post('post', {image: reader.result});
         }
     }
 
