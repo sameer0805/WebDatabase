@@ -18,7 +18,15 @@ class Upload extends Component{
         reader.onloadend = () => {
             console.log(reader.result);
             this.setState({currentImageString: reader.result});
-            axios.post('post', {image: reader.result});
+             // axios.post('http://vcm-1851.vm.duke.edu:5000/api/image_data',
+                // {image: reader.result
+                // })
+                //.then(function(response) {
+                //console.log(response);
+                //})
+                //.catch(function (error) {
+                //console.log(error);
+                //});
         }
     }
 
