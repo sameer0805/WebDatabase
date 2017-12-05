@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 import { UploadField } from '@navjobs/upload'
 
+var axios = require('axios');
+
 class Upload extends Component{
    constructor(){
         super();
@@ -18,15 +20,15 @@ class Upload extends Component{
         reader.onloadend = () => {
             console.log(reader.result);
             this.setState({currentImageString: reader.result});
-             // axios.post('http://vcm-1851.vm.duke.edu:5000/api/image_data',
-                // {image: reader.result
-                // })
-                //.then(function(response) {
-                //console.log(response);
-                //})
-                //.catch(function (error) {
-                //console.log(error);
-                //});
+              axios.post('http://localhost:8000/',
+                 {image: reader.result
+                 })
+                .then(function(response) {
+                console.log(response);
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
         }
     }
 
