@@ -35,7 +35,7 @@ class Upload extends Component{
    render(){
      return (
         <div>
-            <h2> Upload your image </h2>
+            <h2 align = 'center'> Upload your image </h2>
             <UploadField onFiles = {this.onUpload}>
                 <div style = {{
                     backgroundColor : 'gray',
@@ -52,6 +52,3 @@ class Upload extends Component{
 }
 
 export default Upload
-
-
-// convert image to base64
