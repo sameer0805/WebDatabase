@@ -4,20 +4,16 @@ import TextField from 'material-ui/TextField';
 class PatientForm extends React.Component {
     constructor(props) {
     super(props)
-    this.state = {name:''};
-    this.state = {date:''};
-    this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.state = {name:''}
+    this.state = {data: ''};
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChangeName(event) {
-        this.setState({name: event.target.name});
-    }
-
-    handleChangeDate(event) {
-        this.setState({date: event.target.date});
-    }
+    handleInputChange(event) {
+        this.setState({value: event.target.name});
+        this.setState({value: event.target.date});
+        }
 
     handleSubmit(event) {
         alert('A name was submitted: ' + this.state.name);
@@ -29,12 +25,12 @@ class PatientForm extends React.Component {
             <form onSubmit = {this.handleSubmit}>
                 <label>
                     Name:
-                    <input value = {this.state.name} onChange = {this.handleChangeName}/>
+                    <input name = {this.state.value} onChange = {this.handleInputChange}/>
                 </label>
                 <br/>
                 <label>
                     Date:
-                    <input value = {this.state.date} onChange = {this.handleChangeDate}/>
+                    <input date = {this.state.value} onChange = {this.handleInputChange}/>
                 </label>
             </form>
             );
