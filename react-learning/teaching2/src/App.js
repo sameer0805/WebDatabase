@@ -14,26 +14,25 @@ class App extends Component {
         constructor(props) {
         super(props)
         this.state = {open: false};
-        this.handleToggle = this.handleToggle.bind(this)
-        this.handleClose = this.handleClose.bind(this)
         }
 
   handleToggle = ()  => {
     this.setState({open: !this.state.open});
+    console.log('Hello')
   }
 
-  handleClose() {
-      this.setState({open: true});
+  handleClose = () => {
+    this.setState({open: false});
   }
 
   render() {
     return (
       <div>
       <MuiThemeProvider>
-            <AppBar style = {{'width': '100%'}} title = "Melanoma Detector" align = 'center'
-            showMenuIconButton = {true}
-            onMenuIconButtonClick = {this.handleToggle.bind(this)}
-            />
+            <AppBar
+                title="Melanoma Detector"
+                showMenuIconButton = {true}
+                onLeftIconButtonClick = {this.handleToggle} />
             <Drawer
             docked={true}
             open={this.state.open}
