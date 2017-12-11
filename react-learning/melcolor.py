@@ -36,11 +36,3 @@ def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_f
         return saved
     else:
         plt.show()
-
-# plt.hist(imdata,256,[0,256])
-# plt.show()
-
-# colorimage = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
-# plt.imshow(colorimage)
-# plt.colorbar()
-# plt.show()
