@@ -39,8 +39,8 @@ class Upload extends Component{
             <UploadField onFiles = {this.onUpload}>
                 <div style = {{
                     backgroundColor : 'gray',
-                    width : '200px',
-                    height: '200px',
+                    width : '250px',
+                    height: '250px',
                     textAlign: 'center'}}>
                     Upload
                     </div>

@@ -7,7 +7,6 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Upload from './upload';
 import PatientForm from './textbox';
-import FlatButton from 'material-ui/FlatButton';
 
 class App extends Component {
         constructor(props) {
@@ -29,31 +28,15 @@ class App extends Component {
     this.setState({screen: 1})
   }
 
-  handlePredict = () => {
+  handleResults = () => {
     this.setState({screen: 2})
-  }
-
-  handleSymmetry = () => {
-    this.setState({screen: 3})
-  }
-
-  handleColor = () => {
-    this.setState({screen: 4})
-  }
-
-  handleBorder = () => {
-    this.setState({screen:5})
-  }
-
-  handleDiameter = () => {
-    this.setState({screen:6})
   }
 
   render() {
     const screen = this.state.screen;
     if (screen == 1){
     return (
-      <div>
+      <div style = {{justifyContent:'center'}}>
       <MuiThemeProvider>
             <AppBar
                 title="Melanoma Detector"
@@ -65,11 +48,7 @@ class App extends Component {
             onRequestChange={(open) => this.setState({open})}
             screen = {this.state.screen}
             >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
+            <MenuItem onClick = {this.handleResults}> Melanoma Results </MenuItem>
             <MenuItem onClick = {this.handleClose}> CLOSE MENU </MenuItem>
             </Drawer>
             <Upload/>
@@ -84,7 +63,7 @@ class App extends Component {
     <div>
       <MuiThemeProvider>
             <AppBar
-                title="Melanoma Detector"
+                title="Melanoma Detection Results"
                 showMenuIconButton = {true}
                 onLeftIconButtonTouchTap = {this.handleToggle}/>
             <Drawer
@@ -93,115 +72,7 @@ class App extends Component {
             onRequestChange={(open) => this.setState({open})}
             screen = {this.state.screen}
             >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
-            <MenuItem onClick = {this.handleMenuClose}> Return to Home Page </MenuItem>
-            </Drawer>
-      </MuiThemeProvider>
-    </div>
-    )
-    }
-
-    else if (screen == 3){
-    return (
-    <div>
-      <MuiThemeProvider>
-            <AppBar
-                title="Melanoma Detector"
-                showMenuIconButton = {true}
-                onLeftIconButtonTouchTap = {this.handleToggle}/>
-            <Drawer
-            docked={false}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-            screen = {this.state.screen}
-            >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
-            <MenuItem onClick = {this.handleMenuClose}> Return to Home Page </MenuItem>
-            </Drawer>
-      </MuiThemeProvider>
-    </div>
-    )
-    }
-
-    else if (screen == 4){
-    return (
-    <div>
-      <MuiThemeProvider>
-            <AppBar
-                title="Melanoma Detector"
-                showMenuIconButton = {true}
-                onLeftIconButtonTouchTap = {this.handleToggle}/>
-            <Drawer
-            docked={false}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-            screen = {this.state.screen}
-            >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
-            <MenuItem onClick = {this.handleMenuClose}> Return to Home Page </MenuItem>
-            </Drawer>
-      </MuiThemeProvider>
-    </div>
-    )
-    }
-
-    else if (screen == 5){
-    return (
-        <div>
-      <MuiThemeProvider>
-            <AppBar
-                title="Melanoma Detector"
-                showMenuIconButton = {true}
-                onLeftIconButtonTouchTap = {this.handleToggle}/>
-            <Drawer
-            docked={false}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-            screen = {this.state.screen}
-            >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
-            <MenuItem onClick = {this.handleMenuClose}> Return to Home Page </MenuItem>
-            </Drawer>
-      </MuiThemeProvider>
-    </div>
-    )
-    }
-
-    else if (screen == 6){
-    return (
-    <div>
-      <MuiThemeProvider>
-            <AppBar
-                title="Melanoma Detector"
-                showMenuIconButton = {true}
-                onLeftIconButtonTouchTap = {this.handleToggle}/>
-            <Drawer
-            docked={false}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-            screen = {this.state.screen}
-            >
-            <MenuItem onClick = {this.handlePredict}> Melanoma Predictions </MenuItem>
-            <MenuItem onClick = {this.handleSymmetry}> Melanoma Asymmetry</MenuItem>
-            <MenuItem onClick = {this.handleColor}> Melanoma Color </MenuItem>
-            <MenuItem onClick = {this.handleBorder}> Melanoma Border </MenuItem>
-            <MenuItem onClick = {this.handleDiameter}> Melanoma Diameter </MenuItem>
+            <MenuItem onClick = {this.handleResults}> Melanoma Results </MenuItem>
             <MenuItem onClick = {this.handleMenuClose}> Return to Home Page </MenuItem>
             </Drawer>
       </MuiThemeProvider>
