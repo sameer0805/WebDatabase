@@ -7,6 +7,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Upload from './upload';
 import PatientForm from './textbox';
+import OutTable from './outputtable';
 
 class App extends Component {
         constructor(props) {
@@ -66,6 +67,7 @@ class App extends Component {
                 title="Melanoma Detection Results"
                 showMenuIconButton = {true}
                 onLeftIconButtonTouchTap = {this.handleToggle}/>
+            <OutTable/>
             <Drawer
             docked={false}
             open={this.state.open}
