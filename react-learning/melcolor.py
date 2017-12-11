@@ -3,7 +3,6 @@ import cv2
 import matplotlib.pyplot as plt
 
 def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_file_type = '.jpg'):
-    #im = cv2.imread('/Users/Ben/Desktop/melanoma.jpg')
     im = cv2.imread(imagepath)
     colorimage = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     # hist = cv2.calcHist([colorimage], [0], None, [256], [0, 256])
@@ -25,9 +24,10 @@ def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_f
     plt.hist(A,256,[0,256],color = 'r')
     plt.hist(B,256,[0,256],color = 'b')
     plt.hist(centers,32,[0,256],color = 'y')
-    #plt.xlabel()
-    #plt.ylabel()
+    plt.xlabel('Pixel Value')
+    plt.ylabel('Intensity')
     plt.title('Color Histogram')
+    plt.show()
 
     if save_variable == 1:
         save_file_name = save_file_title + save_file_type
