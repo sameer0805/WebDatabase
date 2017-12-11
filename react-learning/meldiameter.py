@@ -1,8 +1,7 @@
-import numpy as np
-import cv2
-import base64
-
 def contour(imagepath,thresh_val = 175, contour_count = 5):
+    import numpy as np
+    import cv2
+    import base64
     #im = cv2.imread('/Users/Ben/Desktop/melanoma.jpg')
     im = cv2.imread(imagepath)
     imgray = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)

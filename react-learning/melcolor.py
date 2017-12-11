@@ -1,8 +1,7 @@
-import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-
 def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_file_type = '.jpg'):
+    import numpy as np
+    import cv2
+    import matplotlib.pyplot as plt
     im = cv2.imread(imagepath)
     colorimage = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     # hist = cv2.calcHist([colorimage], [0], None, [256], [0, 256])
