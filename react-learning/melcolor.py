@@ -1,6 +1,8 @@
 def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_file_type = '.jpg'):
     import numpy as np
     import cv2
+    import matplotlib
+    matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     im = cv2.imread(imagepath)
     colorimage = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
@@ -17,7 +19,7 @@ def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_f
     ## how are initial centers taken
     flags = cv2.KMEANS_RANDOM_CENTERS
 
-    compactness, labels, centers = cv2.kmeans(imdata,2,None,criteria,10,flags)
+    compactness, labels, centers = cv2.kmeans(imdata,2,criteria,10,flags)
     A = imdata[labels==0]
     B = imdata[labels==1]
     plt.hist(A,256,[0,256],color = 'r')
@@ -26,12 +28,12 @@ def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_f
     plt.xlabel('Pixel Value')
     plt.ylabel('Intensity')
     plt.title('Color Histogram')
-    plt.show()
+    #plt.show()
 
     if save_variable == 1:
         save_file_name = save_file_title + save_file_type
         saved = plt.savefig(save_file_name)
-        plt.show()
-        return saved
-    else:
-        plt.show()
+        #plt.show()
+        #return saved
+    #else:
+        #plt.show()
