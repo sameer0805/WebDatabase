@@ -1,4 +1,4 @@
-def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_file_type = '.jpg'):
+def colorplot(imagepath = '/Users/Ben/Desktop/melanoma.jpg', save_file_title = 'histogram',save_file_type = '.jpg'):
     import numpy as np
     import cv2
     import matplotlib
@@ -22,18 +22,23 @@ def colorplot(imagepath, save_variable = 1, save_file_title = 'histogram',save_f
     compactness, labels, centers = cv2.kmeans(imdata,2,criteria,10,flags)
     A = imdata[labels==0]
     B = imdata[labels==1]
+    fig = plt.figure(1)
+    fig.add_subplot(111)
     plt.hist(A,256,[0,256],color = 'r')
     plt.hist(B,256,[0,256],color = 'b')
     plt.hist(centers,32,[0,256],color = 'y')
     plt.xlabel('Pixel Value')
     plt.ylabel('Intensity')
     plt.title('Color Histogram')
-    #plt.show()
+    #save_file_title = 'histogram'
+    #save_file_type = '.jpg'
+    save_file_name = save_file_title + save_file_type
+    plt.savefig(save_file_name)
+    plt.show()
 
-    if save_variable == 1:
-        save_file_name = save_file_title + save_file_type
-        saved = plt.savefig(save_file_name)
-        #plt.show()
-        #return saved
-    #else:
-        #plt.show()
+    plot_string = base64.b64encode(open(save_file_name,'rb').read())
+    return plot_string
+    #decoded_string = base64.b64decode(plot_string)
+    #result = open('decodedimage.jpg','wb')
+    #result.write(decoded_string)
+
