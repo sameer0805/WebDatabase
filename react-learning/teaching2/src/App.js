@@ -18,7 +18,6 @@ class App extends Component {
 
   handleToggle = ()  => {
     this.setState({open: !this.state.open});
-    console.log('Hello')
   }
 
   handleClose = () => {

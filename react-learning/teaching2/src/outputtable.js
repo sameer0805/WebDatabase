@@ -28,7 +28,7 @@ class OutTable extends Component{
       <TableRow>
         <TableRowColumn> Sameer </TableRowColumn>
         <TableRowColumn> 12/11/2017 </TableRowColumn>
-        <TableRowColumn> 0.60 </TableRowColumn>
+        <TableRowColumn> {this.props.prediction} </TableRowColumn>
         <TableRowColumn> 0.40 </TableRowColumn>
       </TableRow>
     </TableBody>
