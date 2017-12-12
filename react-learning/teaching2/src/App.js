@@ -5,8 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import Upload from './upload';
-import PatientForm from './textbox';
+import PatientForm from './uploadform';
 import OutTable from './outputtable';
 
 class App extends Component {
@@ -51,7 +50,6 @@ class App extends Component {
             <MenuItem onClick = {this.handleResults}> Melanoma Results </MenuItem>
             <MenuItem onClick = {this.handleClose}> CLOSE MENU </MenuItem>
             </Drawer>
-            <Upload/>
             <PatientForm/>
       </MuiThemeProvider>
       </div>
@@ -66,7 +64,6 @@ class App extends Component {
                 title="Melanoma Detection Results"
                 showMenuIconButton = {true}
                 onLeftIconButtonTouchTap = {this.handleToggle}/>
-            <OutTable/>
             <Drawer
             docked={false}
             open={this.state.open}

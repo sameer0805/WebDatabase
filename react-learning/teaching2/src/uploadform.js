@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import DropzoneComponent from 'react-dropzone-component';
+import { UploadField } from '@navjobs/upload'
+import OutTable from './outputtable';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import OutTable from './outputtable';
 
 const styles = {
   block: {
@@ -19,7 +22,27 @@ var axios = require('axios');
 class PatientForm extends React.Component {
     constructor(props) {
     super(props)
-    this.state = {name:'',date:'', button: ''};
+    this.state = {name:'',date:'', button: '', currentImageString: '', prediction: ''};
+
+    }
+
+    parsePrediction = (response) => {
+    this.setState({prediction: response.data})
+    console.log(response);
+    }
+
+    onUpload = (files) => {
+        const reader = new FileReader()
+        const file = files[0]
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            console.log(reader.result);
+            this.setState({currentImageString: reader.result});
+              axios.post('http://localhost:8000/',
+                 {image: reader.result
+                 })
+                .then(this.parsePrediction);
+        }
     }
 
     handleNameChange = (event) =>
@@ -48,9 +71,20 @@ class PatientForm extends React.Component {
         // alert(this.state.value);
     }
 
-    render() {
-        return(
-            <div>
+    render(){
+    return(
+    <div>
+            <h2 align = 'center'> Upload your image </h2>
+            <UploadField onFiles = {this.onUpload}>
+                <div style = {{
+                    backgroundColor : 'gray',
+                    width : '250px',
+                    height: '250px',
+                    textAlign: 'center'}}>
+                    Upload
+                    </div>
+            </UploadField>
+            <img src={this.state.currentImageString}/>
             <form onSubmit = {this.handleSubmit}>
                 <label>
                     Name:
@@ -80,11 +114,16 @@ class PatientForm extends React.Component {
             </RadioButtonGroup>
             <RaisedButton onClick = {this.handleSubmit} label = "Submit" style = {styles.margin} />
             </form>
-            </div>
-            );
+            <OutTable
+            prediction={this.state.prediction}
+            name = {this.state.name}
+            date = {this.state.date}
+            />
+    </div>
+    )
+
     }
 
 }
 
 export default PatientForm
-

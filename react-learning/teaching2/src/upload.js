@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 import { UploadField } from '@navjobs/upload'
 import OutTable from './outputtable';
+import PatientForm from './textbox';
 
 var axios = require('axios');
 
 class Upload extends Component{
-   constructor(){
-        super();
+   constructor(props){
+        super(props);
         this.state = {
             currentImageString: '',
             prediction: '',
@@ -48,7 +49,11 @@ class Upload extends Component{
                     </div>
             </UploadField>
             <img src={this.state.currentImageString}/>
-            <OutTable prediction={this.state.prediction}/>
+            <OutTable
+            prediction={this.state.prediction}
+            name = {this.state.name}
+            date = {this.state.date}
+            />
          </div>
      );
    }

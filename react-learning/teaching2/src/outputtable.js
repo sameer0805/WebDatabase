@@ -26,10 +26,10 @@ class OutTable extends Component{
     </TableHeader>
     <TableBody>
       <TableRow>
-        <TableRowColumn> Sameer </TableRowColumn>
-        <TableRowColumn> 12/11/2017 </TableRowColumn>
+        <TableRowColumn> {this.props.name} </TableRowColumn>
+        <TableRowColumn> {this.props.date} </TableRowColumn>
         <TableRowColumn> {this.props.prediction} </TableRowColumn>
-        <TableRowColumn> 0.40 </TableRowColumn>
+        <TableRowColumn> {this.props.prediction} </TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
