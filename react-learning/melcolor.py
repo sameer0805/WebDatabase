@@ -41,41 +41,8 @@ def colorplot(imagepath = '/Users/Ben/Desktop/melanoma.jpg', save_file_title = '
     plt.savefig(save_file_name)
     plt.show()
 
-    #draws the renderer
-    #fig.canvas.draw()
-
-    # Get the RGBA buffer from the figure
-    #w, h = fig.canvas.get_width_height()
-    #buf = np.fromstring(fig.canvas.tostring_argb(), dtype=np.uint8)
-    #buf.shape = (w, h, 4)
-
-    # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
-    #buf = np.roll(buf, 3, axis=2)
-    #return buf
-
-    #convert to numpy array
-    #plot_data = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8, sep='')
-    #plot_data = plot_data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-    #return plot_data
-
     plot_string = base64.b64encode(open(save_file_name,'rb').read())
     return plot_string
     #decoded_string = base64.b64decode(plot_string)
     #result = open('decodedimage.jpg','wb')
     #result.write(decoded_string)
-
-    #with open(save_file_name) as f:
-    #    plot_string = base64.b64encode(f.read())
-
-    #plot_im = cv2.imread(save_file_name)
-    #plot_im = cv2.imread('/Users/Ben/webdatabase/react-learning/src/histogram.jpg')
-
-## alternate method for numpy array conversion
-    # Get the RGBA buffer from the figure
-    #w, h = fig.canvas.get_width_height()
-    #buf = numpy.fromstring(fig.canvas.tostring_argb(), dtype=numpy.uint8)
-    #buf.shape = (w, h, 4)
-
-    # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
-    #buf = numpy.roll(buf, 3, axis=2)
-    #return buf
