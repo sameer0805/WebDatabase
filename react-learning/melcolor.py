@@ -9,6 +9,7 @@ def colorplot(imagepath = '/Users/Ben/Desktop/melanoma.jpg', save_file_title = '
     #import base64
     #import matplotlib.pyplot as plt
     #im = cv2.imread('/Users/Ben/Desktop/melanoma.jpg')
+
     im = cv2.imread(imagepath)
     colorimage = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     # hist = cv2.calcHist([colorimage], [0], None, [256], [0, 256])
