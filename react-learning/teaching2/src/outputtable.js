@@ -20,16 +20,16 @@ class OutTable extends Component{
       <TableRow>
         <TableHeaderColumn> Name </TableHeaderColumn>
         <TableHeaderColumn> Date </TableHeaderColumn>
-        <TableHeaderColumn> % Malignant </TableHeaderColumn>
-        <TableHeaderColumn> % NonMalignant </TableHeaderColumn>
+        <TableHeaderColumn> Probability Malignant </TableHeaderColumn>
+        <TableHeaderColumn> Probability NonMalignant </TableHeaderColumn>
       </TableRow>
     </TableHeader>
     <TableBody>
       <TableRow>
         <TableRowColumn> {this.props.name} </TableRowColumn>
         <TableRowColumn> {this.props.date} </TableRowColumn>
-        <TableRowColumn> {this.props.prediction} </TableRowColumn>
-        <TableRowColumn> {this.props.prediction} </TableRowColumn>
+        <TableRowColumn> {this.props.predictionM} </TableRowColumn>
+        <TableRowColumn> {this.props.predictionNM} </TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
