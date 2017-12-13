@@ -22,14 +22,22 @@ var axios = require('axios');
 class PatientForm extends React.Component {
     constructor(props) {
     super(props)
-    this.state = {name:'',date:'', button: '', currentImageString: '', prediction: ''};
-
+    this.state = {name:'',date:'', button: '', currentImageString: '', predictionNM: '', cont:'', color:'', predictionM: '', status: 1};
     }
 
     parsePrediction = (response) => {
-    this.setState({prediction: response.data.probabilities})
+    this.setState({predictionNM: response.data.probabilities[0]})
+    this.setState({predictionM: response.data.probabilities[1]})
+    this.setState({cont: response.data.contour});
+    this.setState({color: response.data.colorplot});
     console.log(response);
     }
+
+    // parseResults = (response) => {
+    // this.setState({cont: response.data.contour});
+    // this.setState({color: response.data.colorplot});
+    // this.setState({status: 2});
+    // }
 
     onUpload = (files) => {
         const reader = new FileReader()
@@ -39,7 +47,10 @@ class PatientForm extends React.Component {
             console.log(reader.result);
             this.setState({currentImageString: reader.result});
               axios.post('http://localhost:8000/',
-                 {image: reader.result
+                 {image: reader.result,
+                 name: this.state.name,
+                 date: this.state.date,
+                 button: this.state.button
                  })
                 .then(this.parsePrediction);
         }
@@ -58,11 +69,7 @@ class PatientForm extends React.Component {
     handleSubmit = (event) =>
      {
         alert('Entry was submitted for: ' + this.state.name + '. Gender is ' + this.state.button);
-        axios.post('http://localhost:8000/',
-                 {name: this.state.name,
-                 date: this.state.date,
-                 button: this.state.button
-                 })
+        this.setState({status: 2})
      }
 
     handleButton = (event,value) =>
@@ -72,19 +79,10 @@ class PatientForm extends React.Component {
     }
 
     render(){
+    const status = this.state.status
+    if (status == 1) {
     return(
     <div>
-            <h2 align = 'center'> Upload your image </h2>
-            <UploadField onFiles = {this.onUpload}>
-                <div style = {{
-                    backgroundColor : 'gray',
-                    width : '250px',
-                    height: '250px',
-                    textAlign: 'center'}}>
-                    Upload
-                    </div>
-            </UploadField>
-            <img src={this.state.currentImageString}/>
             <form onSubmit = {this.handleSubmit}>
                 <label>
                     Name:
@@ -112,17 +110,39 @@ class PatientForm extends React.Component {
                 style = {styles.radioButton}
             />
             </RadioButtonGroup>
-            <RaisedButton onClick = {this.handleSubmit} label = "Submit" style = {styles.margin} />
+            <h2 align = 'center'> Upload your image </h2>
+            <UploadField onFiles = {this.onUpload}>
+                <div style = {{
+                    backgroundColor : 'gray',
+                    width : '250px',
+                    height: '250px',
+                    textAlign: 'center'}}>
+                    Upload
+                    </div>
+            </UploadField>
+            <img src ={this.state.currentImageString}/>
+            <RaisedButton onClick = {this.handleSubmit} label = "Submit and View Results" style = {styles.margin} />
             </form>
+    </div>
+    )
+    }
+
+    else if (status == 2) {
+    return(
+    <div>
             <OutTable
-            prediction={this.state.prediction}
+            predictionM = {this.state.predictionM}
+            predictionNM = {this.state.predictionNM}
             name = {this.state.name}
             date = {this.state.date}
             />
+            <img src ={this.state.cont}/>
+            <img src ={this.state.color}/>
     </div>
     )
-
     }
+
+}
 
 }
 
