@@ -130,13 +130,17 @@ class PatientForm extends React.Component {
     else if (status == 2) {
     return(
     <div>
+            <h2 align = 'center'> Melanoma Predictions </h2>
             <OutTable
             predictionM = {this.state.predictionM}
             predictionNM = {this.state.predictionNM}
             name = {this.state.name}
             date = {this.state.date}
             />
+            <h2 align = 'left'> Melanoma Border </h2>
             <img src ={this.state.cont}/>
+            <br/>
+            <h2 align = 'left'> Melanoma Color </h2>
             <img src ={this.state.color}/>
     </div>
     )
