@@ -45,6 +45,8 @@ def validate():
     img = request.get_json()
     image_string = img['image']
     filepath, filepath_without_end, file_ending = determine_filepath(image_string)
+    if file_ending is None:
+        labels = "Error: "
     with open (filepath, "w") as image_out:
         image_out.write(re.sub('^data:image/.+;base64,', '', image_string).decode('base64'))
     labels, predictions = predict(filepath)
@@ -53,7 +55,7 @@ def validate():
     labels2 = str(labels)
     predict3 = np.array(predict2)
     predict4 = np.round(predict3, 3)
-    predict5 = str(predict4)
+    predict5 = predict4.tolist()
     colorplot_path = filepath_without_end + "_colorhistorgram.jpg"
     colorplot_img_string = colorplot(filepath, "histogram", ".jpg")
     contour_img_string = contour(filepath, 175, 5, "contour",".jpg")
