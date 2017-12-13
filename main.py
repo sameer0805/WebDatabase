@@ -26,15 +26,41 @@ def determine_filepath(img_string):
         if (check_png != None):
             file_ending = ".png"
         else:
-            check_gif = re.search("^data:image/gif", img_string)
+            check_gif = re.search("^data:image/bmp", img_string)
             if (check_gif != None):
-                file_ending = ".gif"
+                file_ending = ".bmp"
             else:
-                error_string = "Error: Incorrect file type uploaded"
-                return error_string
+                file_ending = ""
+             #   error_string = "Error: Incorrect file type uploaded"
+              #  return error_string
     filepath = PATH + filename + file_ending
     filepath_without_end = PATH + filename
     return filepath, filepath_without_end, file_ending
+
+def analyze_image(filepath, filepath_without_end, file_ending, image_string):
+    if file_ending == "":
+        labels2 = "Error: Incorrect file type uploaded"
+        predict5 = ["Error","Incorrect file type"]
+        contour_img_post = ""
+        colorplot_img_post = ""
+    else:
+        with open (filepath, "w") as image_out:
+            image_out.write(re.sub('^data:image/.+;base64,', '', image_string).decode('base64'))
+        labels, predictions = predict(filepath)
+        name = "test"
+        predict2 = predictions.tolist()
+        labels2 = str(labels)
+        predict3 = np.array(predict2)
+        predict4 = np.round(predict3, 3)
+        predict5 = predict4.tolist()
+        colorplot_path = filepath_without_end + "_colorhistorgram.jpg"
+        colorplot_img_string = colorplot(filepath, "histogram", ".jpg")
+        contour_img_string = contour(filepath, 175, 5, "contour",".jpg")
+        colorplot_img_post = "data:image/jpeg;base64," + colorplot_img_string
+        contour_img_post = "data:image/jpeg;base64," + contour_img_string
+    results = {"labels": labels2, "probabilities": predict5, "contour": contour_img_post,
+               "colorplot": colorplot_img_post}
+    return results
 
 @app.route('/test')
 def hello_world():
@@ -45,23 +71,6 @@ def validate():
     img = request.get_json()
     image_string = img['image']
     filepath, filepath_without_end, file_ending = determine_filepath(image_string)
-    if file_ending is None:
-        labels = "Error: "
-    with open (filepath, "w") as image_out:
-        image_out.write(re.sub('^data:image/.+;base64,', '', image_string).decode('base64'))
-    labels, predictions = predict(filepath)
-    name = "test"
-    predict2 = predictions.tolist()
-    labels2 = str(labels)
-    predict3 = np.array(predict2)
-    predict4 = np.round(predict3, 3)
-    predict5 = predict4.tolist()
-    colorplot_path = filepath_without_end + "_colorhistorgram.jpg"
-    colorplot_img_string = colorplot(filepath, "histogram", ".jpg")
-    contour_img_string = contour(filepath, 175, 5, "contour",".jpg")
-    colorplot_img_post = "data:image/jpeg;base64," + colorplot_img_string
-    contour_img_post = "data:image/jpeg;base64," + contour_img_string
-    results = {"labels": labels2, "probabilities": predict5, "contour": contour_img_post,
-               "colorplot": colorplot_img_post}
+    results = analyze_image(filepath, filepath_without_end, file_ending, image_string)
     return jsonify(results)
 	#write_file(name,file_ending,filepath,malignant,benign,symmetry,border,color,diameter)
