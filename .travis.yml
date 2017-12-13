@@ -17,7 +17,7 @@ install:
   - conda update -q conda # Update
   - docker-compose up --build
   - pip install -U pytest
-
+  - pip install pytest-cov
 # Activate your environment NOTE: Change ci-test to the name of your environment in environment.yml
 script:
   - py.test # Run the tests
