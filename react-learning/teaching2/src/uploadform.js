@@ -27,7 +27,7 @@ class PatientForm extends React.Component {
     }
 
     parsePrediction = (response) => {
-    this.setState({prediction: response.data})
+    this.setState({prediction: response.data.probabilities})
     console.log(response);
     }
 

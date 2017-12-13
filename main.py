@@ -53,9 +53,12 @@ def validate():
     labels2 = str(labels)
     predict3 = np.array(predict2)
     predict4 = np.round(predict3, 3)
+    predict5 = str(predict4)
     colorplot_path = filepath_without_end + "_colorhistorgram.jpg"
-    colorplot(filepath, 1, colorplot_path)
-    contour_img = contour(filepath)
-    results = {"labels": labels2, "probabilities": predict4}
-    return str(results)
+    colorplot_img_string = colorplot(filepath, "histogram", ".jpg")
+    contour_img_string = contour(filepath, 175, 5, "contour",".jpg")
+    colorplot_img_post = "data:image/jpeg;base64," + colorplot_img_string
+    results = {"labels": labels2, "probabilities": predict5, "contour": colorplot_img_post,
+               "colorplot": colorplot_img_post}
+    return jsonify(results)
 	#write_file(name,file_ending,filepath,malignant,benign,symmetry,border,color,diameter)

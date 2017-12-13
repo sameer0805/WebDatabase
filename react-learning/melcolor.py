@@ -1,5 +1,6 @@
 def colorplot(imagepath = '/Users/Ben/Desktop/melanoma.jpg', save_file_title = 'histogram',save_file_type = '.jpg'):
     import numpy as np
+    import base64
     import cv2
     import matplotlib
     matplotlib.use('Agg')

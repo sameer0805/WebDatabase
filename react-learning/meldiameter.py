@@ -1,8 +1,7 @@
-import numpy as np
-import cv2
-import base64
-
 def contour(imagepath, thresh_val = 175, contour_count = 5, contour_file_title = 'contour', save_file_type = '.jpg'):
+    import numpy as np
+    import cv2
+    import base64
     #im = cv2.imread('/Users/Ben/Desktop/melanoma.jpg')
     im = cv2.imread(imagepath)
     imgray = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
@@ -13,8 +12,8 @@ def contour(imagepath, thresh_val = 175, contour_count = 5, contour_file_title =
     contours = sorted(contours, key = cv2.contourArea, reverse = True)[1:contour_count]
     img = cv2.drawContours(im, contours, -1, (0,255,0), 3)
     contour_file_name = contour_file_title + save_file_type
-    cv2.imwrite(save_file_name, img)
+    cv2.imwrite(contour_file_name, img)
 
-    contour_string = base64.b64encode(open(save_file_name, 'rb').read())
+    contour_string = base64.b64encode(open(contour_file_name, 'rb').read())
     return contour_string
 
