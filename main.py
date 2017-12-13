@@ -58,7 +58,8 @@ def validate():
     colorplot_img_string = colorplot(filepath, "histogram", ".jpg")
     contour_img_string = contour(filepath, 175, 5, "contour",".jpg")
     colorplot_img_post = "data:image/jpeg;base64," + colorplot_img_string
-    results = {"labels": labels2, "probabilities": predict5, "contour": colorplot_img_post,
+    contour_img_post = "data:image/jpeg;base64," + contour_img_string
+    results = {"labels": labels2, "probabilities": predict5, "contour": contour_img_post,
                "colorplot": colorplot_img_post}
     return jsonify(results)
 	#write_file(name,file_ending,filepath,malignant,benign,symmetry,border,color,diameter)
