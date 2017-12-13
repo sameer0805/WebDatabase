@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from time import gmtime, strftime
-from meldiameter import contour
-from melcolor import colorplot
 import base64
 import re
 import numpy as np
@@ -11,6 +9,8 @@ from melanomapredictions import predict
 import sys
 sys.path.insert(0, '/notebooks/react-learning/')
 sys.path.insert(0, '/notebooks/react-learning/melcolor.py')
+from meldiameter import contour
+from melcolor import colorplot
 
 app = Flask(__name__)
 CORS(app)
@@ -46,7 +46,7 @@ def analyze_image(filepath, filepath_without_end, file_ending, image_string):
     else:
         with open(filepath, "w") as image_out:
             image_out.write(re.sub('^data:image/.+;base64,', '',
-                                   mage_string).decode('base64'))
+                                   image_string).decode('base64'))
         labels, predictions = predict(filepath)
         name = "test"
         predict2 = predictions.tolist()
@@ -73,10 +73,15 @@ def hello_world():
 def validate():
     img = request.get_json()
     image_string = img['image']
+    name = img['name']
+    date = img['date']
+    button = img['button']
     filepath, filepath_without_end, file_ending = \
         determine_filepath(image_string)
     results = analyze_image(filepath, filepath_without_end,
                             file_ending, image_string)
+    probabilities = results["probabilities"]
+    malignant = probabilities[1]
+    benign = probabilities[0]
     return jsonify(results)
-    # write_file(name,file_ending,filepath,malignant,benign,
-    # symmetry,border,color,diameter)
+    write_file(name, date, button, file_ending, filepath, malignant, benign)
