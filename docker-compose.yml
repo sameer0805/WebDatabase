@@ -9,8 +9,6 @@ services:
       - 8888:8888 
   server:
     build: .
-    command: ["pytest test_melanoma.py"]
-    build: .
     volumes:
       - $PWD:/notebooks
       - $PWD/images:/images
@@ -18,4 +16,4 @@ services:
       - 8000:8000
     environment:
       - FLASK_DEBUG=1
-    command: bash -c ["flask", "run", "--port=8000", "--host=0.0.0.0"]
+    command: ["flask", "run", "--port=8000", "--host=0.0.0.0"]
