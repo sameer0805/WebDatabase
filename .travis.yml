@@ -16,10 +16,8 @@ install:
   - conda config --set always_yes yes --set changeps1 no # Set configuration on conda to not prompt for y/n prompts
   - conda update -q conda # Update
   - docker-compose build
-  - docker-compose up -d
+
 # Activate your environment NOTE: Change ci-test to the name of your environment in environment.yml
 script:
-  - touch namedocker.txt
-  - docker ps -aqf "name=webdatabase_server" > namedocker.txt
-  - docker exec -it $(<namedocker.txt) bash;
-  - py.test 
+  - docker-compose up -d
+  - docker exec -it webdatabase_server_1 py.test test_melanoma.py 
