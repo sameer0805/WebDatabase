@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 import { UploadField } from '@navjobs/upload'
+import OutTable from './outputtable';
+import PatientForm from './textbox';
 
 var axios = require('axios');
 
 class Upload extends Component{
-   constructor(){
-        super();
+   constructor(props){
+        super(props);
         this.state = {
             currentImageString: '',
+            prediction: '',
         }
+    }
+
+    parsePrediction = (response) => {
+    this.setState({prediction: response.data})
+    console.log(response);
     }
 
     onUpload = (files) => {
@@ -23,35 +31,32 @@ class Upload extends Component{
               axios.post('http://localhost:8000/',
                  {image: reader.result
                  })
-                .then(function(response) {
-                console.log(response);
-                })
-                .catch(function (error) {
-                console.log(error);
-                });
+                .then(this.parsePrediction);
         }
     }
 
    render(){
      return (
         <div>
-            <h2> Upload your image </h2>
+            <h2 align = 'center'> Upload your image </h2>
             <UploadField onFiles = {this.onUpload}>
                 <div style = {{
                     backgroundColor : 'gray',
-                    width : '200px',
-                    height: '200px',
+                    width : '250px',
+                    height: '250px',
                     textAlign: 'center'}}>
                     Upload
                     </div>
             </UploadField>
             <img src={this.state.currentImageString}/>
+            <OutTable
+            prediction={this.state.prediction}
+            name = {this.state.name}
+            date = {this.state.date}
+            />
          </div>
      );
    }
 }
 
 export default Upload
-
-
-// convert image to base64

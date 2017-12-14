@@ -7,8 +7,11 @@
     "axios": "^0.17.1",
     "material-ui": "^0.19.4",
     "react": "^16.2.0",
+    "react-center": "^1.1.1",
     "react-dom": "^16.2.0",
     "react-dropzone-component": "^3.0.0",
+    "react-native": "^0.51.0",
+    "react-native-cli": "^2.0.1",
     "react-scripts": "1.0.17"
   },
   "scripts": {
