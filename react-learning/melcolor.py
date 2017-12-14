@@ -1,5 +1,12 @@
 def colorplot(imagepath='/Users/Ben/Desktop/melanoma.jpg',
               save_file_title='histogram', save_file_type='.jpg'):
+    """
+    This method processes the image and displays a color histogram plot.
+    :param imagepath: The image to be inputted for contour drawing.
+    :param save_file_title: This is the desired name of the file.
+    :param save_file_type:  This is the desired file type.
+    :return: The method returns an encoded base64 string of the color histogram plot to be delivered to the front end.
+    """
     import numpy as np
     import base64
     import cv2
