@@ -1,5 +1,3 @@
-from meldiameter import contour
-from melcolor import colorplot
 from main import determine_filepath, validate, analyze_image
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -12,6 +10,8 @@ from melanomapredictions import predict
 import sys
 sys.path.insert(0, '/notebooks/react-learning/')
 sys.path.insert(0, '/notebooks/react-learning/melcolor.py')
+from meldiameter import contour
+from melcolor import colorplot
 
 
 def test_filetype():
