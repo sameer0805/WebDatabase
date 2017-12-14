@@ -21,5 +21,5 @@ install:
 script:
   - touch namedocker.txt
   - docker ps -aqf "name=webdatabase_server" > namedocker.txt
-  - docker exec -it $(<namedocker.txt) bash; py.test # Run the tests
+  - docker exec -it $(<namedocker.txt) bash;
   - py.test 
