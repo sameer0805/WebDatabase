@@ -4,6 +4,12 @@ import matplotlib.image as mpimg
 
 
 def predict(image):
+    """
+    This method takes an image input and returns probabilities of malignancy.
+    :param image: image file inputted by user
+    :return: labels: benign, malignant;
+        predictions: probabilities associated with benign and malignant
+    """
     img = mpimg.imread(image)
     # print("img type:", type(img))
     # print("img shape:", img.shape)
