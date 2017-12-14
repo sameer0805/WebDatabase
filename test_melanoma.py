@@ -15,6 +15,10 @@ from melcolor import colorplot
 
 
 def test_filetype():
+    """
+       This method tests that file types are correctly identified and that a file that is not
+       one of the commonly accepted types (.jpg, .png, .bmp) will be rejected.
+       """
     decoded_jpg = "data:image/jpeg;base64," + \
                   base64.b64encode(open("test_images/test_jpgfile.jpeg",
                                         'rb').read())
@@ -43,6 +47,10 @@ def test_filetype():
 
 
 def test_validate():
+    """
+    This test tests the prediction of an expected image and ensures that
+    its prediction probabilities are as expected.
+    """
     image_string = "data:image/jpeg;base64," + base64.b64encode(
         open("test_images/Melanoma.jpg", 'rb').read())
     filepath = "test_images/Melanoma.jpg"
@@ -56,6 +64,10 @@ def test_validate():
 
 
 def test_null_result():
+    """
+    Thie test uses an incorrect file type and verifies that the correct
+    error message is returned to the web server.
+    """
     decoded_wrong = "data:image/gif;base64" + \
                     base64.b64encode(open(
                         "test_images/test_file_incorrect.gif", 'rb').read())

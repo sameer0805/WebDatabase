@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>main module &mdash; Melanoma Detection  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Melanoma Detection  documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-main">
+<span id="main-module"></span><h1>main module<a class="headerlink" href="#module-main" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="main.analyze_image">
+<code class="descclassname">main.</code><code class="descname">analyze_image</code><span class="sig-paren">(</span><em>filepath</em>, <em>filepath_without_end</em>, <em>file_ending</em>, <em>image_string</em><span class="sig-paren">)</span><a class="headerlink" href="#main.analyze_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method takes the user-inputted image and provides analysis, including prediction of likelihood of malignancy,
+the user-inputted image superimposed with an outlining of the melanoma contour, and a color histogram of the
+intensities (frequencies) associated with each pixel value in gray scale.
+:param filepath: distinct location of each image
+:param filepath_without_end: distinct location of each image (excludes file type)
+:param file_ending: the type designation of file
+:param image_string: the base64 string of inputted image
+:return: The method outputs a dict entitled &#8220;results&#8221; containing the labels (benign and malignant), probabilities
+associated with each, and the base 64 strings of the contour superimposed melanoma image and color histogram
+respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.determine_filepath">
+<code class="descclassname">main.</code><code class="descname">determine_filepath</code><span class="sig-paren">(</span><em>img_string</em><span class="sig-paren">)</span><a class="headerlink" href="#main.determine_filepath" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method takes a base64 image string (of the user-inputted melanoma image) and creates a file path from it.
+Currently, it can account for .jpg, .png., and .bmp file types robustly.
+:param img_string: the encoded base64 string of the user-inputted image
+:return: The method returns the following: filepath, a distinct file path for each image;</p>
+<blockquote>
+<div>filepath_without_end, same as filepath without the file type designation;
+file_ending, the file type of the image.</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.hello_world">
+<code class="descclassname">main.</code><code class="descname">hello_world</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.hello_world" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="main.validate">
+<code class="descclassname">main.</code><code class="descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method takes inputs from the front end, uses the methods determine_filepath and analyze_image to create a file
+path and provide analysis (malignancy predictions, border identification, color intensity), then posts analysis
+results as a json for the front end. Additionally, it creates a database entry encompassing user information,
+file path and type, and malignancy probabilities.
+:return: Results of analysis (labels, probabilities, contour, colorplot) in json form.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/main.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Sameer, Ben, Alice.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/main.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
