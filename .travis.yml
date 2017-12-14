@@ -19,5 +19,7 @@ install:
   - docker-compose up -d
 # Activate your environment NOTE: Change ci-test to the name of your environment in environment.yml
 script:
- #  - docker exec -it 7df0403d6348 bash; py.test # Run the tests
-  - py.test
+  - touch namedocker.txt
+  - docker ps -aqf "name=webdatabase_server" > namedocker.txt
+  - docker exec -it $(<namedocker.txt) bash; py.test # Run the tests
+  - py.test 
