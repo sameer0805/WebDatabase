@@ -17,6 +17,14 @@ CORS(app)
 
 
 def determine_filepath(img_string):
+    """
+    This method takes a base64 image string (of the user-inputted melanoma image) and creates a file path from it.
+    Currently, it can account for .jpg, .png., and .bmp file types robustly.
+    :param img_string: the encoded base64 string of the user-inputted image
+    :return: The method returns the following: filepath, a distinct file path for each image;
+        filepath_without_end, same as filepath without the file type designation;
+        file_ending, the file type of the image.
+    """
     filename = strftime("%Y%m%d_%H_%M_%S", gmtime())
     PATH = "images/"
     check_jpg = re.search("^data:image/jpeg", img_string)
@@ -38,6 +46,18 @@ def determine_filepath(img_string):
 
 
 def analyze_image(filepath, filepath_without_end, file_ending, image_string):
+    """
+    This method takes the user-inputted image and provides analysis, including prediction of likelihood of malignancy,
+    the user-inputted image superimposed with an outlining of the melanoma contour, and a color histogram of the
+    intensities (frequencies) associated with each pixel value in gray scale.
+    :param filepath: distinct location of each image
+    :param filepath_without_end: distinct location of each image (excludes file type)
+    :param file_ending: the type designation of file
+    :param image_string: the base64 string of inputted image
+    :return: The method outputs a dict entitled "results" containing the labels (benign and malignant), probabilities
+    associated with each, and the base 64 strings of the contour superimposed melanoma image and color histogram
+    respectively.
+    """
     if file_ending == "":
         labels2 = "Error: Incorrect file type uploaded"
         predict5 = ["Error", "Incorrect file type"]
@@ -71,6 +91,13 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def validate():
+    """
+    This method takes inputs from the front end, uses the methods determine_filepath and analyze_image to create a file
+    path and provide analysis (malignancy predictions, border identification, color intensity), then posts analysis
+    results as a json for the front end. Additionally, it creates a database entry encompassing user information,
+    file path and type, and malignancy probabilities.
+    :return: Results of analysis (labels, probabilities, contour, colorplot) in json form.
+    """
     img = request.get_json()
     image_string = img['image']
     name = img['name']
